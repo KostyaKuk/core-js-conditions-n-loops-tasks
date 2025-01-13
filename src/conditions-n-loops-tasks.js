@@ -376,8 +376,27 @@ function rotateMatrix(/* matrix */) {
  *  [2, 9, 5, 9]    => [2, 5, 9, 9]
  *  [-2, 9, 5, -3]  => [-3, -2, 5, 9]
  */
-function sortByAsc(/* arr */) {
-  throw new Error('Not implemented');
+function QuickSort(arr) {
+  const middle = [];
+  const leftSide = [];
+  const rightSide = [];
+  if (arr.length < 2) return arr;
+  const pivot = arr[Math.floor(arr.length / 2)];
+  for (let i = 0; i < arr.length; i += 1) {
+    if (arr[i] === pivot) middle.push(arr[i]);
+    else if (arr[i] < pivot) leftSide.push(arr[i]);
+    else rightSide.push(arr[i]);
+  }
+  return [...QuickSort(leftSide), ...middle, ...QuickSort(rightSide)];
+}
+function sortByAsc(arr) {
+  const resultMatrix = arr;
+  const sortArr = QuickSort(arr);
+  for (let i = 0; i < arr.length; i += 1) {
+    resultMatrix[i] = sortArr[i];
+  }
+
+  return resultMatrix;
 }
 
 /**
